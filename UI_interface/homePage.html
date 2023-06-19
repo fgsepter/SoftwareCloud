@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home Page</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+	<style>
+		.lead {
+			font-size: 1.175em;
+			font-weight: 300;
+		}
+		.uk-logo img {
+			height: 28px;
+		}
+	</style>
+
+</head>
+
+<body>
+    <!-- <div class="uk-width-1-2@l"> -->
+        <div class="uk-card ">
+          <div class="uk-card-header">
+            <div class="uk-grid uk-grid-small">
+              <!-- <div class="uk-width-auto">
+                <h4>Cards Content</h4>
+              </div> -->
+
+              <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                  <li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+                  <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+                </ul>
+              </div>
+
+              <!-- <div class="uk-width-expand uk-text-right panel-icons">
+                <a href="#" class="uk-icon-link sortable-icon" title="Move" data-uk-tooltip
+                  data-uk-icon="icon: move"></a>
+                <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+              </div> -->
+
+            </div>
+            <h2 class="uk-heading-line"><span>PennCloud</span></h2>
+            <h4 class="uk-heading-line uk-text-center"><span>Welcome, {HOME_PAGE_INSERT_USERNAME}!</span></h4>
+          </div>
+          <div>
+            <div class="uk-child-width-1-3@m uk-margin-large-top uk-margin-large-left uk-margin-large-right uk-grid-small uk-grid-match" uk-grid>
+
+              <div>
+                <div class="uk-padding uk-margin-left uk-margin-right uk-card uk-card-default uk-card-body uk-height-medium">
+                    <a class="uk-link-heading" href="webmail">
+                        <h3 class="uk-card-title">Webmail</h3>
+                    </a>
+                    <p class = "uk-text-default">Write Email and View Inbox.</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="uk-card uk-margin-left uk-margin-right uk-card-primary uk-card-body uk-height-medium">
+                  <a class="uk-link-heading" href="storage"><h3 class="uk-card-title">Storage</h3></a>
+                  <p>View File Folder and Manage Files.</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="uk-card uk-margin-left uk-margin-right uk-card-secondary uk-card-body uk-height-medium">
+                  <a class="uk-link-heading" href="admin"><h3 class="uk-card-title">Admin Console</h3></a>
+                  <p>View and Manage Server Status, Inspect Raw KVS Data.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    <!-- </div> -->
+
+		<div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: false">
+			<div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+				<button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+				<ul class="uk-nav uk-nav-default">
+          <li class="uk-nav-header">Account</li>
+					<li>
+            <a href="#toggle-animation" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">
+              <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Change Password
+            </a>
+            <!-- <button href="#toggle-animation" class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Toggle</button> -->
+            
+            <div id="toggle-animation" class="uk-container uk-margin-small" hidden>
+              <form class="modal-content animate" action="changePassword" enctype="multipart/form-data" method="POST">
+                <div class="uk-container">
+                    <!-- <h4>Change Password</h4> -->
+                    <label for="password"><b>New Password</b></label>
+                    <input class="uk-input" type="text" style="color:black;" placeholder="Please Enter New Password" id="password" name="password">
+                    <button class="uk-button uk-margin uk-button-secondary" type="submit">Submit</button>
+                    
+                    <!-- <button class="uk-button uk-button-secondary" type="button"
+                        onclick="document.getElementById('changePassword').style.display='none'"
+                        class="cancelButton">Cancel</button> -->
+                </div>
+              </form>
+            </div>
+          </li>
+					<li><a href="logout"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Logout</a></li>
+
+					<!-- <li class="uk-nav-divider"></li>
+					<li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li> -->
+
+          <li class="uk-nav-header">Navigate</li>
+					<li><a href="webmail">Webmail</a></li>
+					<li><a href="storage">Storage</a></li>
+					<li><a href="admin">Admin Console</a></li>
+					
+				</ul>
+				<!-- <h3>Title</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+			</div>
+		</div>
+
+</body>
+
+</html>

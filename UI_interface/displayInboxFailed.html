@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='style.css'> -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home Page</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+	<style>
+		.lead {
+			font-size: 1.175em;
+			font-weight: 300;
+		}
+		.uk-logo img {
+			height: 28px;
+		}
+    </style>
+    <script>
+        function replyEmail(from, to) {
+            var table = '<form action="replyEmail" enctype="multipart/form-data" method="POST"  style="border: none;">';
+            table += '<div class="uk-container">';
+            table += '<h4>Reply Email</h4>';
+            table += '<input class="uk-input" type="text" id="from" name="from" value=' + to + ' readonly class="hidden">';
+            table += '<input class="uk-input uk-margin-top" type="text" id="to" name="to" value=' + from + ' readonly class="hidden" hidden>';
+            table += '<label class="uk-form-label" for="subject"><b>Subject:</b></label>';
+            table += '<input class="uk-input" type="text" id="subject" name="subject">';
+            table += '<label class="uk-form-label" for="content"><b>Content:</b></label>';
+            table += '<textarea class = "uk-textarea uk-margin-bottom" style="width: 100%;" rows="5" name="content" id="content"></textarea>';
+            table += '<button class="uk-button" type="submit">Submit</button>';
+            table += '<button class="uk-button uk-margin-left" type="button"';
+            table += 'onclick="document.getElementById(\'replyEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function replyButtonClick(from, to) {
+            var tableHtml = replyEmail(from, to);
+            var renameFunctionElement = document.getElementById('replyEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+
+
+        function forwardEmail(from, subject, content) {
+            var table = '<form class="modal-content animate" action="forwardEmail" enctype="multipart/form-data" method="POST" style="border: none;">';
+            table += '<div class="container">';
+            table += '<h4>Forward Email</h4>';
+            table += '<input class="uk-input" type="text" id="from" name="from" value="' + from + '" readonly class="hidden"  style="border: none;" hidden>';
+            table += '<label for="to"><b>To:</b></label>';
+            table += '<input class="uk-input" type="text" id="to" name="to" required>';
+            table += '<input class="uk-input" type="text" id="subject" name="subject" value="' + subject + '" readonly class="hidden"  style="border: none;" hidden>';
+            table += '<textarea class = "uk-textarea uk-margin-top uk-margin-bottom" style="width: 100%;" rows="5" name="content" id="content" readonly class="hidden">{EMAIL CONTENT}</textarea>';
+            table += '<button class="uk-button" type="submit">Submit</button>';
+            table += '<button class="uk-button uk-margin-left" type="button"';
+            table += 'onclick="document.getElementById(\'forwardEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function forwardButtonClick(from, subject, content) {
+            var tableHtml = forwardEmail(from, subject, content);
+            var renameFunctionElement = document.getElementById('forwardEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+
+
+        function deleteEmail(id) {
+            var table = '<form class="modal-content animate" action="deleteEmail" method="enctype="multipart/form-data" method="POST"" style="border: none;">';
+            table += '<div class="uk-container">';
+            table += '<text class = "uk-text-warning uk-margin-right">Are you sure you want to delete the email?</text>';
+            table += '<input type="text" id="id" name="id" value="' + id + '" readonly class="hidden"  style="border: none;" hidden>';
+            table += '<button class="uk-button" type="submit">Yes</button>';
+            table += '<button class="uk-button uk-margin-left" type="button"';
+            table += 'onclick="document.getElementById(\'deleteEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">No</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function deleteButtonClick(id) {
+            var tableHtml = deleteEmail(id);
+            var renameFunctionElement = document.getElementById('deleteEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="uk-container">
+          <nav class="uk-navbar-transparent" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <a class="uk-navbar-item uk-logo">PennCloud Webmail</a>
+            </div>
+            <div class="uk-navbar-right">
+              <ul class="uk-navbar-nav">
+                <li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+                <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+    </header>
+
+    
+
+    <section class="uk-section uk-article">
+        <div class="uk-container uk-container-small">
+            <div class="uk-alert-danger" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>Display Inbox Failed!</p>
+            </div>
+            
+            <h2 class="uk-text-bold uk-h1 uk-margin-remove-adjacent uk-margin-remove-top">Subject:{EMAIL SUBJECT}</h2>
+            <h4>
+            <p class="uk-text-muted">From: {EMAIL FROM} | <span data-uk-icon="icon: future"></span> {EMAIL_TIME}</p>
+            </h4>
+            
+            <p class="uk-text-lead">{EMAIL STYLE CONTENT}</p>
+            
+            <!-- <p>UPDATE 24th October 15.10 BST — Vivamus sed consequat urna. Fusce vitae urna sed ante placerat iaculis. Suspendisse potenti. Pellentesque quis fringilla libero. In hac habitasse platea dictumst.</p> -->
+        
+        
+            <div class="uk-container uk-align-center uk-margin-large-top">
+                <div class="uk-inline uk-width-1-1 uk-margin uk-margin-large-left uk-flex">
+
+                    <!-- <div id="replyEmail" class="uk-margin"></div> -->
+                    <button class="uk-button uk-border-pill uk-button-default uk-margin-left"
+                        onclick="replyButtonClick('{EMAIL FROM}', '{REPLACE WITH USERNAME}')">
+                        <span class="uk-icon" data-uk-icon="icon: reply"></span>
+                        Reply</span> 
+                    </button>
+                    
+                    <!-- <div id="forwardEmail" class="uk-margin"></div> -->
+                    <button class="uk-button uk-border-pill uk-button-secondary uk-margin-left"
+                        onclick="forwardButtonClick('{REPLACE WITH USERNAME}', '{EMAIL SUBJECT}')">
+                        <span class="uk-icon" data-uk-icon="icon: forward"></span>
+                        Forward</span> 
+                    </button>
+                    <!-- <div id="deleteEmail" class="uk-margin"></div> -->
+                    <button class="uk-button uk-border-pill uk-button-danger uk-margin-left"
+                        onclick="deleteButtonClick('{EMAIL ID}')">
+                        <span class="uk-icon" data-uk-icon="icon: trash"></span>
+                        Delete</span> 
+                    </button>
+
+                </div>
+            </div>
+
+            <div id="replyEmail" class="uk-margin uk-container " style="border: none;"></div>
+            <div id="forwardEmail" class="uk-margin uk-container" style="border: none;"></div>
+            <div id="deleteEmail" class="uk-margin  uk-container" style="border: none;"></div>
+
+            <!-- <div class="container">
+                <div style="display: flex; margin-top: 20px">
+                    <div id="replyEmail" class="modal"></div>
+                    <button class="blueButton"
+                        onclick="replyButtonClick('{EMAIL FROM}', '{REPLACE WITH USERNAME}')">Reply</button>
+                    <div id="forwardEmail" class="modal"></div>
+                    <button class="blueButton"
+                        onclick="forwardButtonClick('{REPLACE WITH USERNAME}', '{EMAIL SUBJECT}')">Forward</button>
+                    <div id="deleteEmail" class="modal"></div>
+                    <button class="blueButton" onclick="deleteButtonClick('{EMAIL ID}')">Delete</button>
+                </div>
+            </div> -->
+        
+        </div>
+
+
+        
+        
+        
+    </section>
+
+    
+
+    <!-- <div class="container">
+        <label for="subject"><b>Subject:</b></label>
+        <div class="labelSolid">{EMAIL SUBJECT}</div>
+        <label for="subject"><b>From:</b></label>
+        <div class="labelSolid">{EMAIL FROM}</div>
+        <label for="subject"><b>Content:</b></label>
+        <div class="labelSolid"><label>{EMAIL STYLE CONTENT}</label></div>
+    </div> -->
+
+    
+
+
+    <div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: false">
+        <div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+            <button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+            <ul class="uk-nav uk-nav-default">
+      <li class="uk-nav-header">Account</li>
+                <li>
+        <a href="#toggle-animation" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">
+          <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Change Password
+        </a>
+        <!-- <button href="#toggle-animation" class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Toggle</button> -->
+        
+        <div id="toggle-animation" class="uk-container uk-margin-small" hidden>
+          <form class="modal-content animate" action="changePassword" enctype="multipart/form-data" method="POST">
+            <div class="uk-container">
+                <!-- <h4>Change Password</h4> -->
+                <label for="password"><b>New Password</b></label>
+                <input class="uk-input" type="text" placeholder="Please Enter New Password" id="password" name="password">
+                <button class="uk-button uk-margin uk-button-secondary" type="submit">Submit</button>
+                
+                <!-- <button class="uk-button uk-button-secondary" type="button"
+                    onclick="document.getElementById('changePassword').style.display='none'"
+                    class="cancelButton">Cancel</button> -->
+            </div>
+          </form>
+        </div>
+      </li>
+                <li><a href="logout"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Logout</a></li>
+
+                <!-- <li class="uk-nav-divider"></li>
+                <li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li> -->
+
+      <li class="uk-nav-header">Navigate</li>
+                <li><a href="webmail">Webmail</a></li>
+                <li><a href="storage">Storage</a></li>
+                <li><a href="admin">Admin Console</a></li>
+                
+            </ul>
+            <!-- <h3>Title</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+        </div>
+    </div>
+
+    <!-- <div class="homeDiv">
+        <a class="homeButton" href="homePage">HomePage</a>
+        <a class="homeButton" href="webmail">Webmail</a>
+        <a class="homeButton" href="storage">Storage</a>
+        <a class="homeButton" href="logout">Log Out</a>
+    </div> -->
+
+
+</body>
+
+</html>

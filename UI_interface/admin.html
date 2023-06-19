@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+      
+      <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+  
+  </head>
+	<body data-uk-filter="target: .js-filter; animation: fade">
+
+		<header>
+			<div class="uk-container">
+			  <nav class="uk-navbar-transparent" data-uk-navbar>
+				<div class="uk-navbar-left">
+				  <a class="uk-navbar-item uk-logo">PennCloud Admin</a>
+				</div>
+				<div class="uk-navbar-right">
+				  <ul class="uk-navbar-nav">
+					<li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+					<li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+				  </ul>
+				</div>
+			  </nav>
+			</div>
+		  </header>
+
+		<div class="spacer"></div>
+		<!--CARDS WRAPPER-->
+		<section class="uk-section uk-section-small uk-section-default uk-padding-remove-bottom">
+			<div class="uk-container uk-container-expand uk-margin-large-bottom">
+				<ul class="uk-subnav uk-subnav-pill">
+					<!-- <li class="uk-active" data-uk-filter-control=""><a href="#">Show All</a></li> -->
+					<li class = "uk-active" data-uk-filter-control=".frontend-card"><a href="#">Frontend Servers</a></li>
+					<li data-uk-filter-control=".backend-card"><a href="#">Backend Servers</a></li>
+					<li data-uk-filter-control=".kvs-card"><a href="#">KVS Data</a></li>
+				</ul>
+				<div class="uk-grid uk-grid-medium uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l  uk-child-width-1-5@xl uk-grid-match js-filter" data-uk-grid="masonry: true" data-uk-sortable="handle: .drag-icon">
+					
+					<!-- card -->
+					<div class="frontend-card" data-tags="a beautiful landscape - nature outdoor">
+						<div class="uk-card uk-card-small uk-card-default uk-padding">
+                          <div id="Frontend" class="modal">
+                            <form class="modal-content animate">
+                              <div class="container">
+                                <h3 style="text-align: left;">Frontend Servers:</h3>
+                                  <table class="uk-table uk-table-striped" style="width:90%">
+                                        <colgroup>
+                                            <col style="width: 50%;">
+                                            <col style="width: 15%;">
+                                            <col style="width: 15%;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Open/Close</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {REPLACE WITH FRONTEND SERVERS}
+                                        </tbody>
+                                  </table>
+                    
+                                    <!-- <button class="regularButton" type="button"
+                                        onclick="document.getElementById('Frontend').style.display='none'"
+                                        class="cancelButton">Close</button> -->
+                              </div>
+                            </form>
+                          </div>
+						</div>
+					</div>
+					<!-- /card -->
+					<!-- card -->
+					<div class="backend-card" data-tags="amazing music band here - music bands">
+						<div class="uk-card uk-card-small uk-card-default uk-padding">
+							
+							
+							<div id="Backend" class="modal">
+                                <form class="modal-content animate">
+                                    <div class="container">
+                                        <h3 style="text-align: left;">Backend Servers:</h3>
+                                        <table class="uk-table uk-table-striped" style="width:90%">
+                                            <colgroup>
+                                                <col style="width: 50%;">
+                                                <col style="width: 15%;">
+                                                <col style="width: 15%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Status</th>
+                                                    <th>Open/Close</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {REPLACE WITH BACKEND SERVERS}
+
+
+                                            </tbody>
+                                        </table>
+                        
+                                        <!-- <button class="regularButton" type="button"
+                                            onclick="document.getElementById('Backend').style.display='none'"
+                                            class="cancelButton">Close</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        
+							
+                            
+						</div>
+					</div>
+					<!-- /card -->
+					<!-- card -->
+					<div class="kvs-card"  data-tags="amazing pictures - photography">
+						<div class="uk-card uk-card-small uk-card-default uk-padding">
+							
+                            <div id="KVSData" class="modal">
+                                <form class="modal-content animate">
+                                    <div class="container">
+                                        <h3 style="text-align: left;">KVS Data:</h3>
+                                        <table class="uk-table uk-table-striped" style="width:90%">
+                                            <colgroup>
+                                                <col style="width: 50%;">
+                                                <col style="width: 15%;">
+                                                <col style="width: 15%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>Row</th>
+                                                    <th>Column</th>
+                                                    <th>Value</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {REPLACE WITH KVS DATA}
+                                            </tbody>
+                                        </table>
+                        
+                                        <!-- <button class="regularButton" type="button"
+                                            onclick="document.getElementById('KVSData').style.display='none'"
+                                            class="cancelButton">Close</button> -->
+                                    </div>
+                                </form>
+                            </div>
+
+						</div>
+					</div>
+					<!-- /card -->
+					
+				</div>
+			</div>
+		</section>
+		<!--/CARDS WRAPPER-->
+		
+		<!--FOOTER-->
+		<div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: false">
+			<div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+				<button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+				<ul class="uk-nav uk-nav-default">
+          <li class="uk-nav-header">Account</li>
+					<li>
+            <a href="#toggle-animation" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">
+              <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Change Password
+            </a>
+            <div id="toggle-animation" class="uk-container uk-margin-small" hidden>
+              <form class="modal-content animate" action="changePassword" enctype="multipart/form-data" method="POST">
+                <div class="uk-container">
+                    <label for="password"><b>New Password</b></label>
+                    <input class="uk-input" type="text" placeholder="Please Enter New Password" id="password" name="password">
+                    <button class="uk-button uk-margin uk-button-secondary" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </li>
+					<li><a href="logout"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Logout</a></li>
+          <li class="uk-nav-header">Navigate</li>
+					<li><a href="webmail">Webmail</a></li>
+					<li><a href="storage">Storage</a></li>
+					<li><a href="admin">Admin Console</a></li>
+					
+				</ul>
+			</div>
+		</div>
+		<!--FOOTER-->
+	</body>
+</html>

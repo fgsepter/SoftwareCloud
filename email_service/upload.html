@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <style>
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Webmail Service</h1>
+    <div class="container">
+        <button class="regularButton" onclick="document.getElementById('Upload').style.display='block'">Upload</button>
+        <!-- <button class="regularButton"
+            onclick="document.getElementById('Download').style.display='block'">Download</button> -->
+    </div>
+    <div id="Upload" class="modal">
+        <form class="modal-content animate" action="uploadFile" method="POST">
+            <div class="container">
+                <input type="file" id="file" name="file" required>
+                <input type="text" id="file_debug" name="file_debug_name" required>
+                <button class="regularButton" type="submit" onclick="sendEmailRequest()">Submit</button>
+                <button class="regularButton" type="button"
+                    onclick="document.getElementById('Upload').style.display='none'"
+                    class="cancelButton">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

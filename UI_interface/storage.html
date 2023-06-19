@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Storage</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/src/js/components/upload.js"></script> -->
+    
+    <script>
+      const btn1 = document.getElementById('uploadButton');
+		  const btn2 = document.getElementById('createFolderButton');
+		  const class1 = document.getElementById('Upload');
+		  const class2 = document.getElementById('CreateFolder');
+      
+		  // btn1.addEventListener('click', () => {
+		  // 	if (class2.style.display = "block") {
+		  // 		// class2.classList.remove('show');
+      //     class1.style.display = "none";
+		  // 	}
+		  // 	// class1.classList.toggle('show');
+      //   class1.style.display = "block";
+		  // });
+    
+		  // btn2.addEventListener('click', () => {
+		  // 	if (class1.classList.contains('show')) {
+		  // 		class1.classList.remove('show');
+		  // 	}
+		  // 	class2.classList.toggle('show');
+		  // });
+        function renameFunction(oldname) {
+            var table = '<form class="modal-content animate" action="rename" enctype="multipart/form-data" method="POST">';
+            table += '<div class="container">';
+            table += '<label for="oldname"><b>Old name:</b></label>';
+            table += '<input type="text" name="oldname" value="' + oldname + '" readonly>';
+            table += '<label for="newname"><b>Please enter new name:</b></label>';
+            table += '<input type="text" placeholder="Please Enter new name" name="newname" required>';
+
+            table += '<button class="regularButton" type="submit">Submit</button>';
+            table += '<button class="regularButton" type="button"';
+            table += 'onclick="document.getElementById(\'renameFunction\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+
+
+            return table;
+        }
+
+        function renameButtonClick(oldname) {
+            var tableHtml = renameFunction(oldname);
+            var renameFunctionElement = document.getElementById('renameFunction');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+
+
+        function moveFunction(filname) {
+            var table = '<form class="modal-content animate" action="move" enctype="multipart/form-data" method="POST">';
+            table += '<div class="container">';
+            table += '<label for="filname"><b>File name:</b></label>';
+            table += '<input type="text" name="filname" value="' + filname + '" readonly>';
+            table += '<label for="path"><b>Please enter new directory:</b></label>';
+            table += '<input type="text" placeholder="Please Enter new directory" name="path" required>';
+            table += '<button class="regularButton" type="submit">Submit</button>';
+            table += '<button class="regularButton" type="button"';
+            table += 'onclick="document.getElementById(\'moveFunction\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+
+
+            return table;
+        }
+
+        function moveButtonClick(oldname) {
+            var tableHtml = moveFunction(oldname);
+            var renameFunctionElement = document.getElementById('moveFunction');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="uk-container">
+          <nav class="uk-navbar-transparent" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <a class="uk-navbar-item uk-logo">PennCloud Storage</a>
+            </div>
+            <div class="uk-navbar-right">
+              <ul class="uk-navbar-nav">
+                <li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+                <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+    </header>
+
+    <section class="uk-section uk-section-default">
+        <div class="uk-container">
+          <!-- <h1 class="uk-icon uk-heading uk-margin-right" > -->
+            <h4 class="uk-text-lead">
+              <span data-uk-icon="icon:folder; ratio: 1.5"></span> Current Directory: {CURRENT DIRECTORY}</span>
+            </h4>
+          
+            <!-- onclick="document.getElementById('Upload').style.display='block'" -->
+          <button id="uploadButton" class="uk-button uk-border-pill uk-button-secondary uk-margin-left uk-margin-large-right"
+            uk-toggle="target: #Upload"
+            >
+            <span class="uk-icon" data-uk-icon="icon: upload"></span>
+            Upload File</span> 
+          </button>
+        
+          <!--  -->
+          <button id="createFolderButton"
+          class="uk-button uk-border-pill uk-button-secondary uk-margin-left uk-margin-large-left"
+          uk-toggle="target: #CreateFolder"
+            onclick="document.getElementById('CreateFolder').style.display='block'">
+            <span class="uk-icon" data-uk-icon="icon: plus"></span>
+            Create New Folder</span> 
+          </button>
+
+          <!-- uk-tile uk-tile-default -->
+          <div id="Upload" class="uk-margin-top">
+            <!-- <form class="modal-content animate" action="uploadFile" enctype="multipart/form-data" method="POST">
+              <div class="container uk-margin-large-top">
+                  <input type="file" id="file" name="file" required>
+                  <button class="uk-button" type="submit">Upload</button>
+                  <button class="uk-button" type="button" uk-toggle="target: #Upload"
+                      class="cancelButton">Cancel</button>
+              </div>
+            </form> -->
+
+            <div id="Upload" class="uk-placeholder uk-text-center" hidden>
+              <form class="modal-content animate" action="uploadFile" enctype="multipart/form-data" method="POST">
+                <div uk-form-custom>
+                <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i> 
+                                Attach binaries by 
+                  <span class="uk-link">selecting one<input type="file" id="file" name="file" required></span>
+                </div>
+                <button class="uk-button" type="submit">Upload</button> 
+                <button class="uk-button" type="button" uk-toggle="target: #Upload"
+                      class="cancelButton">Cancel</button>
+              </form>
+              </form>
+            </div>
+
+          <!-- <div id="progressbar" class="uk-progress uk-hidden">
+              <div class="uk-progress-bar" style="width: 0%;">0%</div>
+          </div> -->
+
+          </div>
+
+          <!-- uk-tile uk-tile-default -->
+          <div id="CreateFolder" class="" style="width:60%" hidden>
+            <form class="modal-content animate" action="createFolder" enctype="multipart/form-data"
+              enctype="multipart/form-data" method="POST">
+              <div class="uk-container uk-margin-large-top uk-flex">
+                  <input class="uk-input" placeholder="Enter Folder Name" type="text" id="name" name="name" required>
+                  <div class="'uk-margin"></div>
+                  <button class="uk-button margin-left" type="submit">Create</button>
+                  <button class="uk-button margin-left" type="button" uk-toggle="target: #CreateFolder"
+                      class="cancelButton">Cancel</button> 
+                      <!-- onclick="document.getElementById('CreateFolder').style.display='none'" -->
+              </div>
+            </form>
+          </div>
+
+          <div class="uk-child-width-1-2@s uk-margin-large-top uk-grid-match" uk-grid>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+
+
+                  <div class="uk-card-header">
+                    <div class="uk-grid uk-grid-small">
+                      <div class="">
+                        <h4>Directories:</h4>
+                      </div>
+                      <div class="uk-text-left panel-icons">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-card-body">
+                    <div>
+                      <table class = "uk-table">
+                        <colgroup>
+                            <col style="width: 60%;">
+                            <col style="width: 10%;">
+                            <col style="width: 10%;">
+                            <col style="width: 10%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Directory Name</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {REPLACE WITH DIRECTORY}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                  
+
+                  <div class="uk-card-header">
+                    <div class="uk-grid uk-grid-small">
+                      <div class="">
+                        <h4>Files:</h4>
+                      </div>
+                      <div class="uk-text-right panel-icons">
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="uk-card-body">
+                    <table class = "uk-table">
+                      <colgroup>
+                          <col style="width: 50%;">
+                          <col style="width: 10%;">
+                          <col style="width: 10%;">
+                          <col style="width: 10%;">
+                          <col style="width: 10%;">
+                      </colgroup>
+                      <thead>
+                          <tr>
+                              <th>File Name</th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {REPLACE WITH FILE}
+                      </tbody>
+                    </table>
+                  </div>
+
+
+                </div>
+            </div>
+        </div>
+        
+
+          <!-- <div class="uk-child-width-1-2@m uk-text-left uk-margin" uk-grid uk-height-match="target: > div > .uk-card">
+            <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+              item
+              
+            </div>
+
+            <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+              item
+              
+
+              
+            </div>
+          
+          </div> -->
+
+            
+    
+            
+
+    
+        </div>
+    </section>
+
+
+    <!--FOOTER-->
+	<div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: false">
+			<div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+				<button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+				<ul class="uk-nav uk-nav-default">
+          <li class="uk-nav-header">Account</li>
+					<li>
+            <a href="#toggle-animation" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">
+              <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Change Password
+            </a>
+            <div id="toggle-animation" class="uk-container uk-margin-small" hidden>
+              <form class="modal-content animate" action="changePassword" enctype="multipart/form-data" method="POST">
+                <div class="uk-container">
+                    <label for="password"><b>New Password</b></label>
+                    <input class="uk-input" type="text" placeholder="Please Enter New Password" id="password" name="password">
+                    <button class="uk-button uk-margin uk-button-secondary" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </li>
+					<li><a href="logout"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Logout</a></li>
+          <li class="uk-nav-header">Navigate</li>
+					<li><a href="webmail">Webmail</a></li>
+					<li><a href="storage">Storage</a></li>
+					<li><a href="admin">Admin Console</a></li>
+					
+				</ul>
+			</div>
+	</div>
+	<!--FOOTER-->
+
+</body>
+
+</html>

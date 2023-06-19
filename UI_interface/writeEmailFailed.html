@@ -1,0 +1,164 @@
+<!--
+ * @Author: Yixuan Meng yixuanm@seas.upenn.edu
+ * @Date: 2023-04-21 17:24:52
+ * @LastEditors: Yixuan Meng yixuanm@seas.upenn.edu
+ * @LastEditTime: 2023-05-05 16:13:34
+ * @FilePath: /T03/UI_interface/webmail.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home Page</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+	<style>
+		.lead {
+			font-size: 1.175em;
+			font-weight: 300;
+		}
+		.uk-logo img {
+			height: 28px;
+		}
+	</style>
+
+</head>
+
+<body>
+  <header>
+    <div class="uk-container">
+      <nav class="uk-navbar-transparent" data-uk-navbar>
+        <div class="uk-navbar-left">
+          <a class="uk-navbar-item uk-logo">PennCloud Webmail</a>
+        </div>
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+            <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="uk-section uk-section-muted uk-box-shadow-small uk-section-xsmall uk-margin-large-left uk-margin-large-right">
+    <div class="uk-alert-danger" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p>Write Email Failed!</p>
+    </div>
+    
+    <div class="uk-container uk-margin-large-left uk-margin-large-right">
+        
+
+      <div class="uk-grid uk-grid-small uk-flex uk-flex-top uk-padding" data-uk-grid>
+        <div class="uk-container">
+            <img src="https://unsplash.it/65/65/?random" alt="" class="uk-border-circle uk-flex">
+        </div>
+
+        <div class="uk-container uk-margin-left">
+          <h4 class="uk-container">{HOME_PAGE_INSERT_USERNAME}</h4>
+          <a class="uk-link-text" uk-toggle="target: #toggle-animation-compose; animation: uk-animation-fade">
+            <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: pencil"></span>Compose
+          </a>
+
+          <div id="toggle-animation-compose" class="uk-container" hidden>
+            <form action="composeEmail" enctype="multipart/form-data" method="POST"> 
+              <!-- class="modal-content animate"  -->
+              <div class="uk-container">
+                <div class="uk-margin uk-margin-large-top uk-grid-small uk-child-width-auto uk-grid">
+                  <!-- <div class="uk-margin"> -->
+                    <label class="uk-form-label" for="to"><b>Recipient:</b></label>
+                    <input class = "uk-input" type="text" id="to" name="to" required>
+                    <label class="uk-form-label" for="subject"><b>Subject:</b></label>
+                    <input class = "uk-input" type="text" id="subject" name="subject">
+                  <!-- </div> -->
+                </div>
+
+
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="content"><b>Content:</b></label>
+                    <textarea class = "uk-textarea" style="width: 100%;" rows="5" name="content" id="content"></textarea>
+                  </div>
+
+                  <button class="uk-button" type="submit">Submit</button>
+                  <button class=" uk-button" type="button"
+                    uk-toggle="target: #toggle-animation-compose; animation: uk-animation-fade">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="uk-section uk-section-default">
+    <div class="uk-container">
+      <h4 class="uk-heading-line uk-text-center"><span>Inbox</span></h4>
+      <table class="uk-table uk-margin-large-left uk-margin-large-right">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {REPLACE WITH DATA}
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+    
+
+	<div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: false">
+			<div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+				<button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+				<ul class="uk-nav uk-nav-default">
+          <li class="uk-nav-header">Account</li>
+					<li>
+            <a href="#toggle-animation" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">
+              <span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Change Password
+            </a>
+            <!-- <button href="#toggle-animation" class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Toggle</button> -->
+            
+            <div id="toggle-animation" class="uk-container uk-margin-small" hidden>
+              <form class="modal-content animate" action="changePassword" enctype="multipart/form-data" method="POST">
+                <div class="uk-container">
+                    <!-- <h4>Change Password</h4> -->
+                    <label for="password"><b>New Password</b></label>
+                    <input class="uk-input" type="text" placeholder="Please Enter New Password" id="password" name="password">
+                    <button class="uk-button uk-margin uk-button-secondary" type="submit">Submit</button>
+                    
+                    <!-- <button class="uk-button uk-button-secondary" type="button"
+                        onclick="document.getElementById('changePassword').style.display='none'"
+                        class="cancelButton">Cancel</button> -->
+                </div>
+              </form>
+            </div>
+          </li>
+					<li><a href="logout"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Logout</a></li>
+
+					<!-- <li class="uk-nav-divider"></li>
+					<li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li> -->
+
+          <li class="uk-nav-header">Navigate</li>
+					<li><a href="webmail">Webmail</a></li>
+					<li><a href="storage">Storage</a></li>
+					<li><a href="admin">Admin Console</a></li>
+					
+				</ul>
+				<!-- <h3>Title</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+			</div>
+	</div>
+
+</body>
+
+</html>

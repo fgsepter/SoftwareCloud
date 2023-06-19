@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home Page</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+	<style>
+        .lead {
+			font-size: 1.175em;
+			font-weight: 300;
+		}
+		.uk-logo img {
+			height: 28px;
+		}
+	</style>
+    <script>
+        function replyEmail(from, to) {
+            var table = '<form class="modal-content animate" action="replyEmail" enctype="multipart/form-data" method="POST">';
+            table += '<div class="container">';
+            table += '<h2>Reply Email</h2>';
+            table += '<input type="text" id="from" name="from" value=' + to + ' readonly class="hidden">';
+            table += '<input type="text" id="to" name="to" value=' + from + ' readonly class="hidden">';
+            table += '<label for="subject"><b>Subject:</b></label>';
+            table += '<input type="text" id="subject" name="subject">';
+            table += '<label for="content"><b>Content:</b></label>';
+            table += '<textarea style="width: 100%;" rows="5" name="content" id="content"></textarea>';
+            table += '<button class="regularButton" type="submit">Submit</button>';
+            table += '<button class="regularButton" type="button"';
+            table += 'onclick="document.getElementById(\'replyEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function replyButtonClick(from, to) {
+            var tableHtml = replyEmail(from, to);
+            var renameFunctionElement = document.getElementById('replyEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+
+
+        function forwardEmail(from, subject, content) {
+            var table = '<form class="modal-content animate" action="forwardEmail" enctype="multipart/form-data" method="POST">';
+            table += '<div class="container">';
+            table += '<h2>Forward Email</h2>';
+            table += '<input type="text" id="from" name="from" value="' + from + '" readonly class="hidden">';
+            table += '<label for="to"><b>To:</b></label>';
+            table += '<input type="text" id="to" name="to" required>';
+            table += '<input type="text" id="subject" name="subject" value="' + subject + '" readonly class="hidden">';
+            table += '<textarea style="width: 100%;" rows="5" name="content" id="content" readonly class="hidden">{EMAIL CONTENT}</textarea>';
+            table += '<button class="regularButton" type="submit">Submit</button>';
+            table += '<button class="regularButton" type="button"';
+            table += 'onclick="document.getElementById(\'forwardEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function forwardButtonClick(from, subject, content) {
+            var tableHtml = forwardEmail(from, subject, content);
+            var renameFunctionElement = document.getElementById('forwardEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+
+
+        function deleteEmail(id) {
+            var table = '<form class="modal-content animate" action="deleteEmail" method="enctype="multipart/form-data" method="POST"">';
+            table += '<div class="container">';
+            table += '<text>Are you sure you want to delete the email?</text>';
+            table += '<input type="text" id="id" name="id" value="' + id + '" readonly class="hidden">';
+            table += '<button class="regularButton" type="submit">Submit</button>';
+            table += '<button class="regularButton" type="button"';
+            table += 'onclick="document.getElementById(\'deleteEmail\').style.display=\'none\'"';
+            table += 'class="cancelButton">Cancel</button>';
+            table += '</div></form>';
+            return table;
+        }
+
+        function deleteButtonClick(id) {
+            var tableHtml = deleteEmail(id);
+            var renameFunctionElement = document.getElementById('deleteEmail');
+            renameFunctionElement.style.display = 'block';
+            renameFunctionElement.innerHTML = tableHtml;
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="uk-container">
+          <nav class="uk-navbar-transparent" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <a class="uk-navbar-item uk-logo">PennCloud Webmail</a>
+            </div>
+            <div class="uk-navbar-right">
+              <ul class="uk-navbar-nav">
+                <li class="uk-active uk-visible@m"><a href="/homePage" data-uk-icon="home"></a></li>
+                <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+    </header>
+
+
+
+    <h1>Webmail Service</h1>
+
+    <div class="container">
+        <label for="subject"><b>Subject:</b></label>
+        <div class="labelSolid">{EMAIL SUBJECT}</div>
+        <label for="subject"><b>From:</b></label>
+        <div class="labelSolid">{EMAIL FROM}</div>
+        <label for="subject"><b>Content:</b></label>
+        <div class="labelSolid"><label>{EMAIL STYLE CONTENT}</label></div>
+    </div>
+
+    <div class="container">
+        <div style="display: flex; margin-top: 20px">
+            <div id="replyEmail" class="modal"></div>
+            <button class="blueButton"
+                onclick="replyButtonClick('{EMAIL FROM}', '{REPLACE WITH USERNAME}')">Reply</button>
+            <div id="forwardEmail" class="modal"></div>
+            <button class="blueButton" onclick="forwardButtonClick('{EMAIL FROM}', '{EMAIL SUBJECT}')">Forward</button>
+            <div id="deleteEmail" class="modal"></div>
+            <button class="blueButton" onclick="deleteButtonClick('{EMAIL ID}')">Delete</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
